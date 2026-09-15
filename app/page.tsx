@@ -69,6 +69,8 @@ const results = [
 export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState(false)
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null)
 
   useEffect(() => {
@@ -101,9 +103,31 @@ export default function Page() {
     }
   }, [lightbox])
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setSubmitted(true)
+    setError(false)
+    setSending(true)
+    try {
+      const data = new FormData(event.currentTarget)
+      const payload = {
+        name: String(data.get('name') ?? ''),
+        email: String(data.get('email') ?? ''),
+        phone: String(data.get('phone') ?? ''),
+        city: String(data.get('city') ?? ''),
+        message: String(data.get('message') ?? ''),
+      }
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!response.ok) throw new Error('Error al enviar la solicitud')
+      setSubmitted(true)
+    } catch {
+      setError(true)
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -202,7 +226,7 @@ export default function Page() {
 
       <section className="section team-section" id="equipo"><div className="section-heading" data-reveal><div><p className="eyebrow">Personas que acompañan</p><h2>Nuestro <em>equipo</em></h2></div><p>Una dirección comprometida con la educación, heredada de un maestro que creyó en el Cauca.</p></div><div className="team-grid"><article className="team-card" data-reveal><div className="team-photo"><img src={rectoraImg.src} alt="Claudia Patricia Giraldo Carmona, rectora de BEFAC" /></div><h3>Claudia Patricia Giraldo Carmona</h3><p>Rectora</p><small>+57 316 657 3266 · cgiraldocarmona@gmail.com</small></article><article className="team-card" data-reveal style={{ transitionDelay: '120ms' }}><div className="team-photo"><img src={fundadorImg.src} alt="Jaime Giraldo Arbeláez, rector fundador de BEFAC" /></div><h3>Jaime Giraldo Arbeláez</h3><p>Rector fundador · 1941 – 2011</p><small>Padre, abuelo y maestro. Fundador de BEFAC en 1993.</small></article></div></section>
 
-      <section className="enroll-section" id="inscribete"><div className="enroll-copy" data-reveal><p className="eyebrow light-eyebrow">El próximo paso es tuyo</p><h2>Inscríbete<br /><em>ahora</em></h2><p>Déjanos tus datos y un asesor BEFAC se pondrá en contacto contigo para acompañarte en el proceso.</p><div className="contact-line"><Phone size={18} /><span>También puedes llamarnos<br /><strong>+57 316 657 3266</strong></span></div><div className="contact-line"><Mail size={18} /><span>O escribirnos<br /><strong>cgiraldocarmona@gmail.com</strong></span></div><div className="contact-line"><MapPin size={18} /><span>Nos encontramos en<br /><strong>Avenida Aeropuerto, Colegio INEM · Popayán</strong></span></div></div><div className="form-card" data-reveal style={{ transitionDelay: '120ms' }}>{submitted ? <div className="success-state"><CheckCircle2 size={46} /><h3>¡Gracias por escribirnos!</h3><p>Recibimos tus datos. Muy pronto un asesor BEFAC se pondrá en contacto contigo.</p><button className="button button-primary" onClick={() => setSubmitted(false)}>Enviar otra solicitud</button></div> : <form onSubmit={handleSubmit}><div className="form-title"><span>02</span><h3>Cuéntanos sobre ti</h3></div><label>Nombre completo<input required name="name" placeholder="Escribe tu nombre" /></label><div className="form-row"><label>Celular<input required name="phone" type="tel" placeholder="300 000 0000" /></label><label>Municipio<input required name="city" placeholder="Escribe tu municipio" /></label></div><label>¿Cómo podemos ayudarte?<textarea name="message" rows={3} placeholder="Quiero conocer más sobre..." /></label><button className="button button-dark" type="submit">Quiero ser parte de BEFAC <Send size={17} /></button><small>Al enviar aceptas el tratamiento de tus datos personales.</small></form>}</div></section>
+      <section className="enroll-section" id="inscribete"><div className="enroll-copy" data-reveal><p className="eyebrow light-eyebrow">El próximo paso es tuyo</p><h2>Inscríbete<br /><em>ahora</em></h2><p>Déjanos tus datos y un asesor BEFAC se pondrá en contacto contigo para acompañarte en el proceso.</p><div className="contact-line"><Phone size={18} /><span>También puedes llamarnos<br /><strong>+57 316 657 3266</strong></span></div><div className="contact-line"><Mail size={18} /><span>O escribirnos<br /><strong>cgiraldocarmona@gmail.com</strong></span></div><div className="contact-line"><MapPin size={18} /><span>Nos encontramos en<br /><strong>Avenida Aeropuerto, Colegio INEM · Popayán</strong></span></div></div><div className="form-card" data-reveal style={{ transitionDelay: '120ms' }}>{submitted ? <div className="success-state"><CheckCircle2 size={46} /><h3>¡Gracias por escribirnos!</h3><p>Recibimos tus datos. Muy pronto un asesor BEFAC se pondrá en contacto contigo.</p><button className="button button-primary" onClick={() => setSubmitted(false)}>Enviar otra solicitud</button></div> : <form onSubmit={handleSubmit}><div className="form-title"><span>02</span><h3>Cuéntanos sobre ti</h3></div><label>Nombre completo<input required name="name" placeholder="Escribe tu nombre" /></label><label>Correo electrónico<input required name="email" type="email" placeholder="tucorreo@correo.com" /></label><div className="form-row"><label>Celular<input required name="phone" type="tel" placeholder="300 000 0000" /></label><label>Municipio<input required name="city" placeholder="Escribe tu municipio" /></label></div><label>¿Cómo podemos ayudarte?<textarea name="message" rows={3} placeholder="Quiero conocer más sobre..." /></label>{error && <p className="form-error">No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp al +57 316 657 3266.</p>}<button className="button button-dark" type="submit" disabled={sending}>{sending ? 'Enviando...' : 'Quiero ser parte de BEFAC'} {!sending && <Send size={17} />}</button><small>Al enviar aceptas el tratamiento de tus datos personales.</small></form>}</div></section>
 
       <footer className="site-footer"><a className="brand footer-brand" href="#inicio"><span className="brand-mark"><img src={logoUrl} alt="" /></span><span><strong>BEFAC</strong><small>Experiencia y compromiso</small></span></a><p>Bachillerato Formal de Adultos del Cauca<br />NIT 34.559.338-8 · Resolución 4124 de 2010 · DANE 31900100440<br />Contacto: +57 316 657 3266</p><div className="footer-social" aria-label="Redes sociales de BEFAC">{socials.map(({ label, href, Icon }) => <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} title={label}><Icon size={17} /></a>)}</div><span className="copyright">© 2026 BEFAC</span></footer>
       </main>
