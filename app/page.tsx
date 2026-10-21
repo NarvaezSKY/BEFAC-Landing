@@ -28,13 +28,11 @@ import school8 from "@/components/img/8.webp";
 import school9 from "@/components/img/9.webp";
 import rectoraImg from "@/components/img/Rectora.png";
 import fundadorImg from "@/components/img/Fundador.png";
-
-const logoUrl =
-  "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/BEFACLogo-vRpZ4Po3wmRnlRVfesTBGoYVgVNznG.png";
+import logoImg from "@/components/img/logo.png";
 
 const phonePrimary = { display: "310 232 4481", href: "tel:+573102324481" };
 const phoneSecondary = { display: "316 657 3266", href: "tel:+573166573266" };
-const emailMain = "basededatosbefac@gmail.com";
+const emailMain = "cgiraldocarmona@gmail.com";
 const emailRectora = "cgiraldocarmona@yahoo.com";
 const whatsappUrl = "https://wa.me/573166573266";
 const whatsappUrlAlt = "https://wa.me/573102324481";
@@ -209,7 +207,7 @@ export default function Page() {
             aria-label="BEFAC, volver al inicio"
           >
             <span className="brand-mark">
-              <img src={logoUrl} alt="" />
+              <img src={logoImg.src} alt="" fetchPriority="high" />
             </span>
             <span>
               <strong>BEFAC</strong>
@@ -945,7 +943,12 @@ export default function Page() {
         <footer className="site-footer">
           <a className="brand footer-brand" href="#inicio">
             <span className="brand-mark">
-              <img src={logoUrl} alt="" />
+              <img
+                src={logoImg.src}
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
             </span>
             <span>
               <strong>BEFAC</strong>

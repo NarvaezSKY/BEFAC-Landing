@@ -41,8 +41,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: '/icon.svg',
-    apple: '/apple-icon.png',
+    icon: '/favicon-32.png',
+    apple: '/apple-touch-icon.png',
   },
 }
 
@@ -57,7 +57,7 @@ const jsonLd = {
   name: 'Bachillerato Formal de Adultos del Cauca',
   alternateName: 'BEFAC',
   url: siteUrl,
-  logo: `${siteUrl}/icon.svg`,
+  logo: `${siteUrl}/logo-512.png`,
   description:
     'Institución educativa mixta, privada y sin ánimo de lucro, fundada en junio de 1993 en Popayán. Ofrece bachillerato formal de adultos del Cauca en modalidad presencial y virtual para jóvenes mayores de 15 años y adultos.',
   foundingDate: '1993-06-01',
@@ -66,7 +66,7 @@ const jsonLd = {
     name: 'Jaime Giraldo Arbeláez',
   },
   telephone: '+573102324481',
-  email: 'basededatosbefac@gmail.com',
+  email: 'cgiraldocarmona@gmail.com',
   areaServed: {
     '@type': 'AdministrativeArea',
     name: 'Cauca, Colombia',
