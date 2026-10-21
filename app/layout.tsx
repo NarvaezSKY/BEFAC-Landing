@@ -65,7 +65,7 @@ const jsonLd = {
     '@type': 'Person',
     name: 'Jaime Giraldo Arbeláez',
   },
-  telephone: '+573102324481',
+  telephone: '+573166573266',
   email: 'cgiraldocarmona@gmail.com',
   areaServed: {
     '@type': 'AdministrativeArea',

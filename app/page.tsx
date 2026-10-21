@@ -30,12 +30,12 @@ import rectoraImg from "@/components/img/Rectora.png";
 import fundadorImg from "@/components/img/Fundador.png";
 import logoImg from "@/components/img/logo.png";
 
-const phonePrimary = { display: "310 232 4481", href: "tel:+573102324481" };
-const phoneSecondary = { display: "316 657 3266", href: "tel:+573166573266" };
+const phonePrimary = { display: "316 657 3266", href: "tel:+573166573266" };
+const phoneSecondary = { display: "320 705 0390", href: "tel:+573207050390" };
 const emailMain = "cgiraldocarmona@gmail.com";
 const emailRectora = "cgiraldocarmona@yahoo.com";
 const whatsappUrl = "https://wa.me/573166573266";
-const whatsappUrlAlt = "https://wa.me/573102324481";
+const whatsappUrlAlt = "https://wa.me/573207050390";
 const socials = [
   {
     label: "Facebook",
@@ -646,7 +646,7 @@ export default function Page() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      WhatsApp 310 232 4481 <ArrowRight size={15} />
+                      WhatsApp 320 705 0390 <ArrowRight size={15} />
                     </a>
                   </div>
                 </div>
