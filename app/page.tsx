@@ -32,7 +32,12 @@ import fundadorImg from "@/components/img/Fundador.png";
 const logoUrl =
   "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/BEFACLogo-vRpZ4Po3wmRnlRVfesTBGoYVgVNznG.png";
 
+const phonePrimary = { display: "310 232 4481", href: "tel:+573102324481" };
+const phoneSecondary = { display: "316 657 3266", href: "tel:+573166573266" };
+const emailMain = "basededatosbefac@gmail.com";
+const emailRectora = "cgiraldocarmona@yahoo.com";
 const whatsappUrl = "https://wa.me/573166573266";
+const whatsappUrlAlt = "https://wa.me/573102324481";
 const socials = [
   {
     label: "Facebook",
@@ -63,19 +68,39 @@ const navItems = [
 const studentPhotos = [
   {
     src: school2.src,
-    alt: "Estudiantes del Colegio BEFAC",
+    alt: "Estudiantes del bachillerato de adultos BEFAC en Popayán",
     className: "student-photo-tall",
   },
   {
     src: school7.src,
-    alt: "Comunidad educativa del Colegio BEFAC",
+    alt: "Comunidad educativa del bachillerato formal de adultos BEFAC",
     className: "student-photo-wide",
   },
-  { src: school3.src, alt: "Estudiantes del Colegio BEFAC", className: "" },
-  { src: school4.src, alt: "Jornada en el Colegio BEFAC", className: "" },
-  { src: school5.src, alt: "Estudiantes del Colegio BEFAC", className: "" },
-  { src: school8.src, alt: "Jornada en el Colegio BEFAC", className: "" },
-  { src: school9.src, alt: "Estudiantes del Colegio BEFAC", className: "" },
+  {
+    src: school3.src,
+    alt: "Estudiantes del bachillerato de adultos BEFAC en el Cauca",
+    className: "",
+  },
+  {
+    src: school4.src,
+    alt: "Jornada de clases en el bachillerato de adultos BEFAC",
+    className: "",
+  },
+  {
+    src: school5.src,
+    alt: "Estudiantes del bachillerato formal de adultos BEFAC",
+    className: "",
+  },
+  {
+    src: school8.src,
+    alt: "Jornada de clases del bachillerato de adultos BEFAC en Popayán",
+    className: "",
+  },
+  {
+    src: school9.src,
+    alt: "Estudiantes del bachillerato de adultos BEFAC en El Tambo",
+    className: "",
+  },
 ];
 
 const moduleTags = [
@@ -228,7 +253,7 @@ export default function Page() {
             style={{ transitionDelay: "200ms" }}
             aria-hidden="true"
           >
-            <img src={heroImg.src} alt="" />
+            <img src={heroImg.src} alt="" fetchPriority="high" />
           </div>
           <div className="hero-fade" aria-hidden="true" />
           <div className="hero-copy" data-reveal>
@@ -242,8 +267,8 @@ export default function Page() {
             </h1>
             <p className="hero-text">
               En BEFAC creemos que nunca es tarde para cumplir tus metas.
-              Termina tu bachillerato y abre nuevas oportunidades para ti y tu
-              familia.
+              Termina tu bachillerato de adultos en Popayán y El Tambo y abre
+              nuevas oportunidades para ti y tu familia.
             </p>
             <div className="hero-actions">
               <a className="button button-primary" href="#inscribete">
@@ -289,9 +314,9 @@ export default function Page() {
             </strong>
           </div>
           <p>
-            Institución mixta, privada y sin ánimo de lucro, comprometida con la
-            educación formal de jóvenes mayores de 15 años y adultos en el
-            Cauca.
+            Institución mixta, privada y sin ánimo de lucro. Más de 30 años
+            ofreciendo bachillerato formal de adultos del Cauca en Popayán y El
+            Tambo a jóvenes mayores de 15 años y adultos.
           </p>
           <a href="#quienes-somos" aria-label="Ir a quiénes somos">
             <ArrowRight />
@@ -315,7 +340,8 @@ export default function Page() {
             <div className="about-lead" data-reveal>
               <div className="outline-number">01</div>
               <p>
-                Institución educativa mixta, privada y sin ánimo de lucro,
+                El Bachillerato Formal de Adultos del Cauca (BEFAC) es una
+                institución educativa mixta, privada y sin ánimo de lucro,
                 fundada en junio de 1993 en Popayán. Brindamos educación formal
                 a jóvenes mayores de 15 años y adultos, sin discriminación por
                 su condición, ideas políticas, sociales, filosóficas o
@@ -534,7 +560,12 @@ export default function Page() {
           <div className="locations-grid">
             <div className="location-stack" data-reveal>
               <div className="location-photo">
-                <img src={school1.src} alt="Colegio BEFAC en Popayán" />
+                <img
+                  src={school1.src}
+                  alt="Sede del bachillerato de adultos BEFAC en Popayán, Colegio INEM"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div className="photo-label">
                   <MapPin size={18} />
                   <span>
@@ -545,7 +576,12 @@ export default function Page() {
                 </div>
               </div>
               <div className="location-photo">
-                <img src={school6.src} alt="Sede BEFAC en El Tambo, Cauca" />
+                <img
+                  src={school6.src}
+                  alt="Sede del bachillerato de adultos BEFAC en El Tambo, Cauca"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div className="photo-label">
                   <MapPin size={18} />
                   <span>
@@ -599,13 +635,22 @@ export default function Page() {
                     <br />
                     Información e inscripciones por WhatsApp y redes sociales
                   </p>
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Contactar por WhatsApp <ArrowRight size={15} />
-                  </a>
+                  <div className="whatsapp-links">
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      WhatsApp 316 657 3266 <ArrowRight size={15} />
+                    </a>
+                    <a
+                      href={whatsappUrlAlt}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      WhatsApp 310 232 4481 <ArrowRight size={15} />
+                    </a>
+                  </div>
                 </div>
               </article>
             </div>
@@ -636,7 +681,12 @@ export default function Page() {
                 onClick={() => setLightbox(photo)}
                 aria-label={`Ampliar imagen: ${photo.alt}`}
               >
-                <img src={photo.src} alt={photo.alt} />
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
               </button>
             ))}
           </div>
@@ -724,12 +774,18 @@ export default function Page() {
               <div className="team-photo">
                 <img
                   src={rectoraImg.src}
-                  alt="Claudia Patricia Giraldo Carmona, rectora de BEFAC"
+                  alt="Claudia Patricia Giraldo Carmona, rectora del bachillerato de adultos BEFAC"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <h3>Claudia Patricia Giraldo Carmona</h3>
               <p>Rectora</p>
-              <small>+57 316 657 3266 · cgiraldocarmona@gmail.com</small>
+              <small>
+                {phonePrimary.display} · {phoneSecondary.display}
+                <br />
+                <a href={`mailto:${emailRectora}`}>{emailRectora}</a>
+              </small>
             </article>
             <article
               className="team-card"
@@ -739,7 +795,9 @@ export default function Page() {
               <div className="team-photo">
                 <img
                   src={fundadorImg.src}
-                  alt="Jaime Giraldo Arbeláez, rector fundador de BEFAC"
+                  alt="Jaime Giraldo Arbeláez, rector fundador del Bachillerato Formal de Adultos del Cauca"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <h3>Jaime Giraldo Arbeláez</h3>
@@ -766,7 +824,11 @@ export default function Page() {
               <span>
                 También puedes llamarnos
                 <br />
-                <strong>+57 316 657 3266</strong>
+                <strong>
+                  <a href={phonePrimary.href}>{phonePrimary.display}</a>
+                  {" · "}
+                  <a href={phoneSecondary.href}>{phoneSecondary.display}</a>
+                </strong>
               </span>
             </div>
             <div className="contact-line">
@@ -774,7 +836,13 @@ export default function Page() {
               <span>
                 O escribirnos
                 <br />
-                <strong>cgiraldocarmona@gmail.com</strong>
+                <strong>
+                  <a href={`mailto:${emailMain}`}>{emailMain}</a>
+                </strong>
+                <br />
+                <strong>
+                  <a href={`mailto:${emailRectora}`}>{emailRectora}</a>
+                </strong>
               </span>
             </div>
             <div className="contact-line">
@@ -855,7 +923,7 @@ export default function Page() {
                 {error && (
                   <p className="form-error">
                     No pudimos enviar tu solicitud. Inténtalo de nuevo o
-                    escríbenos por WhatsApp al +57 316 657 3266.
+                    escríbenos por WhatsApp al {phoneSecondary.display}.
                   </p>
                 )}
                 <button
@@ -889,7 +957,10 @@ export default function Page() {
             <br />
             NIT 34.559.338-8 · Resolución 4124 de 2010 · DANE 31900100440
             <br />
-            Contacto: +57 316 657 3266
+            Contacto:{" "}
+            <a href={phonePrimary.href}>{phonePrimary.display}</a> ·{" "}
+            <a href={phoneSecondary.href}>{phoneSecondary.display}</a> ·{" "}
+            <a href={`mailto:${emailMain}`}>{emailMain}</a>
           </p>
           <div className="footer-social" aria-label="Redes sociales de BEFAC">
             {socials.map(({ label, href, Icon }) => (
