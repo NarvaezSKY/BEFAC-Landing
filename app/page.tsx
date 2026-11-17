@@ -991,19 +991,17 @@ export default function Page() {
           onClick={(event) => {
             if (event.target === event.currentTarget) setLightbox(null);
           }}
-          onKeyDown={(event) => {
-            if (event.key === "Escape") setLightbox(null);
-          }}
         >
           <button
             type="button"
             className="lightbox-close"
             onClick={() => setLightbox(null)}
             aria-label="Cerrar imagen"
+            autoFocus
           >
             <X size={22} />
           </button>
-          <img src={lightbox.src} alt={lightbox.alt} />
+          <img src={lightbox.src} alt={lightbox.alt} decoding="async" />
         </div>
       )}
     </>
