@@ -26,6 +26,10 @@ import school6 from "@/components/img/6.webp";
 import school7 from "@/components/img/7.webp";
 import school8 from "@/components/img/8.webp";
 import school9 from "@/components/img/9.webp";
+import school10 from "@/components/img/10.jpg";
+import school11 from "@/components/img/11.jpg";
+import school12 from "@/components/img/12.jpg";
+import school13 from "@/components/img/13.jpg";
 import rectoraImg from "@/components/img/Rectora.png";
 import fundadorImg from "@/components/img/Fundador.png";
 import logoImg from "@/components/img/logo.png";
@@ -99,7 +103,29 @@ const studentPhotos = [
     alt: "Estudiantes del bachillerato de adultos BEFAC en El Tambo",
     className: "",
   },
+  {
+    src: school10.src,
+    alt: "Comunidad educativa del bachillerato de adultos BEFAC",
+    className: "",
+  },
+  {
+    src: school11.src,
+    alt: "Actividades de formación del bachillerato de adultos BEFAC",
+    className: "",
+  },
+  {
+    src: school12.src,
+    alt: "Estudiantes de BEFAC en el Cauca",
+    className: "",
+  },
+  {
+    src: school13.src,
+    alt: "Jornada educativa del bachillerato de adultos BEFAC",
+    className: "",
+  },
 ];
+
+const featuredPhotos = studentPhotos.slice(0, 7);
 
 const moduleTags = [
   "Tarea",
@@ -137,6 +163,7 @@ export default function Page() {
   const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(
     null,
   );
+  const [galleryOpen, setGalleryOpen] = useState(false);
 
   useEffect(() => {
     const elements = Array.from(
@@ -158,9 +185,11 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    if (!lightbox) return;
+    if (!lightbox && !galleryOpen) return;
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setLightbox(null);
+      if (event.key !== "Escape") return;
+      if (lightbox) setLightbox(null);
+      else setGalleryOpen(false);
     };
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -168,7 +197,7 @@ export default function Page() {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [lightbox]);
+  }, [lightbox, galleryOpen]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -669,7 +698,7 @@ export default function Page() {
             </p>
           </div>
           <div className="student-gallery">
-            {studentPhotos.map((photo, i) => (
+            {featuredPhotos.map((photo, i) => (
               <button
                 type="button"
                 className={`gallery-item ${photo.className}`}
@@ -687,6 +716,16 @@ export default function Page() {
                 />
               </button>
             ))}
+          </div>
+          <div className="gallery-all-wrap" data-reveal>
+            <button
+              type="button"
+              className="gallery-all-button"
+              onClick={() => setGalleryOpen(true)}
+            >
+              Ver todas las fotos ({studentPhotos.length}){" "}
+              <ArrowRight size={15} />
+            </button>
           </div>
           <div className="quote-row" data-reveal>
             <span className="quote-mark">“</span>
@@ -982,6 +1021,56 @@ export default function Page() {
           <span className="copyright">© 2026 BEFAC</span>
         </footer>
       </main>
+      {galleryOpen && (
+        <div
+          className="gallery-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Galería completa de fotos"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) setGalleryOpen(false);
+          }}
+        >
+          <div className="gallery-modal-inner">
+            <div className="gallery-modal-head">
+              <div>
+                <p className="eyebrow">Galería completa</p>
+                <h3>Nuestros estudiantes</h3>
+              </div>
+              <button
+                type="button"
+                className="gallery-modal-close"
+                onClick={() => setGalleryOpen(false)}
+                aria-label="Cerrar galería"
+                autoFocus
+              >
+                <X size={22} />
+              </button>
+            </div>
+            <p className="gallery-modal-hint">
+              Desliza horizontalmente y haz clic en una foto para ampliarla.
+            </p>
+            <div className="gallery-modal-track">
+              {studentPhotos.map((photo) => (
+                <button
+                  type="button"
+                  className="gallery-modal-item"
+                  key={photo.src}
+                  onClick={() => setLightbox(photo)}
+                  aria-label={`Ampliar imagen: ${photo.alt}`}
+                >
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
       {lightbox && (
         <div
           className="lightbox"
